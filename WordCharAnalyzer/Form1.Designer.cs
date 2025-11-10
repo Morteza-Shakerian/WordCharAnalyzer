@@ -36,6 +36,7 @@
             this.TxtStatement = new System.Windows.Forms.TextBox();
             this.LblWordCount = new System.Windows.Forms.Label();
             this.LblLetterCount = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LblWordList
@@ -115,11 +116,22 @@
             this.LblLetterCount.Size = new System.Drawing.Size(78, 25);
             this.LblLetterCount.TabIndex = 16;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label1.Location = new System.Drawing.Point(38, 287);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(42, 25);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "سلام";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(377, 339);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.LblLetterCount);
             this.Controls.Add(this.LblWordCount);
             this.Controls.Add(this.LblWordList);
@@ -145,6 +157,7 @@
         private System.Windows.Forms.TextBox TxtStatement;
         private System.Windows.Forms.Label LblWordCount;
         private System.Windows.Forms.Label LblLetterCount;
+        private System.Windows.Forms.Label label1;
     }
 }
 
