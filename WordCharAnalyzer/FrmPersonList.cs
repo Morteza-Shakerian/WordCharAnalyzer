@@ -31,29 +31,61 @@ namespace WordCharAnalyzer
             FillDGV();
         }
 
-        private void FillDGV()
+        public void FillDGV()
         {
+            dgvPerson.DataSource = null;
             dgvPerson.DataSource = persons.ToList();
         }
 
         private void btnAddPerson_Click(object sender, EventArgs e)
         {
-            var frmAddPerson=new FrmAddPerson();
+            var frmAddPerson = new FrmAddPerson();
+            frmAddPerson.Text = "افزودن شخص";
             frmAddPerson.ShowDialog();
             FillDGV();
-            
+
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
             string message = "";
-            if (!DeletePerson(ref message))
-                MessageBox.Show(message, "خطا");
-            else
+            if (DeletePerson(ref message))
             {
-                persons.RemoveAt(dgvPerson.CurrentRow.Index);
-                FillDGV();
+                var personToDelete = dgvPerson.CurrentRow.DataBoundItem as Person;
+                var result = MessageBox.Show(
+                $"آیا از حذف  {personToDelete.FirstName} اطمینان دارید؟",
+                 "تایید حذف",
+                 MessageBoxButtons.YesNo,
+                 MessageBoxIcon.Warning
+                 );
+                if (result == DialogResult.Yes)
+                {
+                    persons.Remove(personToDelete);
+                    FillDGV();
+                }
             }
+            else
+                MessageBox.Show(message, "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (dgvPerson.CurrentRow != null)
+            {
+                var personToEdit = dgvPerson.CurrentRow.DataBoundItem as Person;
+                var frmEditPerson = new FrmAddPerson(personToEdit);
+                frmEditPerson.Text = "ویرایش اشخاص";
+
+
+
+                DialogResult result = frmEditPerson.ShowDialog();
+                if (result == DialogResult.OK)
+                    FillDGV();
+            }
+            else
+                MessageBox.Show("یک ردیف را انتخاب کنید", "خطا"
+             , MessageBoxButtons.OK, MessageBoxIcon.Error);
+
         }
     }
 }
